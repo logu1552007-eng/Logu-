@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactive Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f9c74f;
+            --danger: #f94144;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .counter-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 1.5rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .todo-container {
+            margin: 1.5rem 0;
+        }
+
+        .todo-input {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .todo-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-family: inherit;
+        }
+
+        .todo-input button {
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .todo-list {
+            list-style: none;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .color-box {
+            width: 200px;
+            height: 200px;
+            margin: 1rem auto;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .theme-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .theme-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-primary { background: var(--primary); }
+        .theme-accent { background: var(--accent); }
+        .theme-success { background: var(--success); }
+        .theme-warning { background: var(--warning); }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript Interactive Showcase</h1>
+            <p>Explore JavaScript features through interactive examples</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="counter">
+            <h2>Counter</h2>
+            <p>A simple counter demonstrating DOM manipulation and event handling.</p>
+            
+            <div class="counter-container">
+                <button class="btn btn-danger" id="decrement">-</button>
+                <div class="counter-value" id="counterValue">0</div>
+                <button class="btn btn-success" id="increment">+</button>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="btn" id="resetCounter">Reset</button>
+            </div>
+        </section>
+
+        <section id="todo">
+            <h2>Todo List</h2>
+            <p>Manage tasks with this interactive todo list demonstrating array methods and local storage.</p>
+            
+            <div class="todo-container">
+                <div class="todo-input">
+                    <input type="text" id="todoInput" placeholder="Enter a new task...">
+                    <button class="btn btn-success" id="addTodo">Add</button>
+                </div>
+                
+                <ul class="todo-list" id="todoList"></ul>
+            </div>
+        </section>
+
+        <section id="color-changer">
+            <h2>Background Color Changer</h2>
+            <p>Change the color of the box below using buttons demonstrating event listeners and style manipulation.</p>
+            
+            <div class="color-box" id="colorBox"></div>
+            
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn btn-primary" data-color="#4361ee">Blue</button>
+                <button class="btn btn-accent" data-color="#f72585">Pink</button>
+                <button class="btn btn-success" data-color="#4cc9f0">Teal</button>
+                <button class="btn btn-warning" data-color="#f9c74f">Yellow</button>
+                <button class="btn btn-danger" data-color="#f94144">Red</button>
+            </div>
+        </section>
+
+        <section id="theme-switcher">
+            <h2>Theme Switcher</h2>
+            <p>Change the theme of the page using CSS variables and JavaScript.</p>
+            
+            <div class="theme-selector">
+                <div class="theme-btn theme-primary" data-theme="primary"></div>
+                <div class="theme-btn theme-accent" data-theme="accent"></div>
+                <div class="theme-btn theme-success" data-theme="success"></div>
+                <div class="theme-btn theme-warning" data-theme="warning"></div>
+            </div>
+            
+            <p style="text-align: center;">Click on a color to change the theme</p>
+        </section>
+
+        <section id="api-demo">
+            <h2>API Simulation</h2>
+            <p>Simulate fetching data from an API with async JavaScript.</p>
+            
+            <div style="text-align: center;">
+                <button class="btn" id="fetchData">Fetch Data</button>
+                <div id="apiData" style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: var(--radius);"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>JavaScript Interactive Showcase | Created with modern JavaScript techniques</p>
+        </div>
+    </footer>
+
+    <script>
+        // Counter functionality
+        const counterValue = document.getElementById('counterValue');
+        const incrementBtn = document.getElementById('increment');
+        const decrementBtn = document.getElementById('decrement');
+        const resetBtn = document.getElementById('resetCounter');
+        
+        let count = 0;
+        
+        incrementBtn.addEventListener('click', () => {
+            count++;
+            counterValue.textContent = count;
+        });
+        
+        decrementBtn.addEventListener('click', () => {
+            count--;
+            counterValue.textContent = count;
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            counterValue.textContent = count;
+        });
+
+        // Todo List functionality
+        const todoInput = document.getElementById('todoInput');
+        const addTodoBtn = document.getElementById('addTodo');
+        const todoList = document.getElementById('todoList');
+        
+        let todos = [];
+        
+        function renderTodos() {
+            todoList.innerHTML = '';
+            
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+                if (todo.completed) {
+                    li.classList.add('completed');
+                }
+                
+                li.innerHTML = `
+                    <span>${todo.text}</span>
+                    <div>
+                        <button class="btn btn-success complete-btn
